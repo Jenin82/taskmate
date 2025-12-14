@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskMaster MVP
+
+A multi-step task marketplace where users can hire TaskMasters for various tasks like fuel delivery, queue standing, pickup & delivery, and more.
+
+## Features
+
+- **ChatGPT-style Task Input** - Natural language task description with auto-detection
+- **Dynamic Forms** - Task-specific forms based on category
+- **Live Tracking** - Real-time map tracking with tasker location
+- **Fair Pricing** - Distance-based and time-based pricing calculations
+- **Modern UI** - Built with shadcn/ui components and Tailwind CSS
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with App Router
+- **UI Library**: shadcn/ui
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Maps**: Google Maps API
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
+- Google Maps API Key
+
+### Setup
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/taskmate.git
+cd taskmate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up environment variables:
 
-## Learn More
+```bash
+cp env.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Add your Google Maps API key to `.env.local`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. Run the development server:
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Google Maps API Setup
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable the following APIs:
+   - Maps JavaScript API
+   - Places API
+   - Geocoding API
+4. Create an API key and restrict it to your domain
+
+## Project Structure
+
+```
+/app
+  /page.tsx                 # Task request page (home)
+  /task-details/page.tsx    # Dynamic task details form
+  /payment/page.tsx         # Payment summary
+  /tracking/[id]/page.tsx   # Live tracking
+/components
+  /ui/*                     # shadcn components
+  /LocationPicker.tsx       # Google Maps location picker
+  /TaskCard.tsx             # Task summary card
+  /LiveMap.tsx              # Live tracking map
+  /TaskerCard.tsx           # Tasker profile card
+  /PriceBreakdown.tsx       # Pricing display
+  /ProgressStepper.tsx      # Multi-step indicator
+  /TimelineStatus.tsx       # Task progress timeline
+  /SearchingOverlay.tsx     # Tasker search animation
+/lib
+  /mockData.ts              # Sample data & constants
+  /taskDetection.ts         # Keyword detection logic
+  /pricingCalculator.ts     # Pricing calculations
+  /utils.ts                 # Utility functions
+/store
+  /taskStore.ts             # Zustand state management
+/types
+  /index.ts                 # TypeScript interfaces
+```
+
+## Task Categories
+
+- **Fuel Delivery** - Petrol/diesel delivery to your location
+- **Queue Standing** - Someone waits in line for you
+- **Pickup & Delivery** - Pick up and deliver items
+- **General Task** - Any other task you need help with
+
+## Demo
+
+Try the coupon code `FIRST50` for 50% off!
+
+## License
+
+MIT
