@@ -35,7 +35,7 @@ export function LiveMap({
 }: LiveMapProps) {
   const [currentTaskerPos, setCurrentTaskerPos] = useState(taskerLocation);
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
@@ -96,8 +96,9 @@ export function LiveMap({
     animationRef.current = requestAnimationFrame(animateMovement);
 
     return () => {
-      if (animationRef.current) {
+      if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     };
   }, [animate, taskerLocation, locations, onTaskerMove]);
